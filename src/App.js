@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    let [name, setName] = useState('');
+    let [sum, setSum] = useState(0);
+    const onChangeName = (e) => {
+        setName(e.target.value.replace (/\D/, ''));
+    }
+
+    useEffect(() => {
+        let value;
+        name === '' ? value=0 : value=parseInt(name)
+        value === 0 ? setSum(0) : setSum((value*(value+1))/2);
+    },[name]);
+
+    return (
+    <div id="main" className="App">
+      <input type="text" value={name} onChange={onChangeName}/>
+        <h1>{sum}</h1>
     </div>
   );
 }
